@@ -17,8 +17,7 @@ html, body, [class*="css"] {
     background-color: #0F0F0F;
     color: #E8E2D9;
 }
-#MainMenu, footer, header { visibility: hidden;
-}
+#MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 2rem 3rem; max-width: 860px; }
 
 .hero {
@@ -75,7 +74,7 @@ hr { border-color: #222 !important; }
 st.set_page_config(page_title="Library Assistant", page_icon="📚", layout="centered")
 
 
-# APA Citation Helper
+# ── APA Citation Helper ──────────────────────────────────────
 def build_apa_citation(metadata):
     author    = metadata.get("author", "Unknown Author")
     year      = metadata.get("year", "n.d.")
@@ -90,7 +89,7 @@ def build_apa_citation(metadata):
     return citation
 
 
-# Build RAG Chain
+# ── Build RAG Chain ──────────────────────────────────────────
 @st.cache_resource
 def build_rag_chain():
     embedding_model = HuggingFaceEmbeddings(
@@ -108,7 +107,7 @@ def build_rag_chain():
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         temperature=0.2,
-        google_api_key="AIzaSyBXbHmhNsiZFKVwsuqkSEdu03n5xPZKqUg"
+        google_api_key=st.secrets["GOOGLE_API_KEY"]
     )
     system_prompt = (
         "You are a professional Library Assistant. "
@@ -153,15 +152,14 @@ if query:
         st.write(answer)
 
         # APA Citations
-        
-st.markdown("---")
-st.markdown("<small>📎 <b>References</b></small>", unsafe_allow_html=True)
-seen_citations = set()
-for doc in result["context"]:
-    citation = build_apa_citation(doc.metadata)
-    if citation not in seen_citations:
-        seen_citations.add(citation)
-        st.caption(citation)
+        st.markdown("---")
+        st.markdown("<small>📎 <b>References</b></small>", unsafe_allow_html=True)
+        seen_citations = set()
+        for doc in result["context"]:
+            citation = build_apa_citation(doc.metadata)
+            if citation not in seen_citations:
+                seen_citations.add(citation)
+                st.caption(citation)
 
         # Source Chunks
         with st.expander("View source chunks"):
