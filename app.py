@@ -17,195 +17,198 @@ st.set_page_config(
 )
 
 # ── MODERN UI / CSS ─────────────────────────────────────────
-# Note: Google Fonts import works better in the <head>, but this fallback works for most cases
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+def local_css():
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
-    --bg: #0B1120;
-    --card: rgba(15, 23, 42, 0.72);
-    --border: rgba(255,255,255,0.08);
-    --text: #F8FAFC;
-    --muted: #94A3B8;
-    --accent: #7C3AED;
-    --accent-2: #06B6D4;
-}
+    :root {
+        --bg: #0B1120;
+        --card: rgba(15, 23, 42, 0.72);
+        --border: rgba(255,255,255,0.08);
+        --text: #F8FAFC;
+        --muted: #94A3B8;
+        --accent: #7C3AED;
+        --accent-2: #06B6D4;
+    }
 
-html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at top left, #111827 0%, #0B1120 45%, #020617 100%);
-    color: var(--text);
-}
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(circle at top left, #111827 0%, #0B1120 45%, #020617 100%);
+        color: var(--text);
+    }
 
-#MainMenu, footer, header { visibility: hidden; }
+    #MainMenu, footer, header { visibility: hidden; }
 
-.stApp {
-    background: radial-gradient(circle at top left, #111827 0%, #0B1120 45%, #020617 100%);
-}
+    .stApp {
+        background: radial-gradient(circle at top left, #111827 0%, #0B1120 45%, #020617 100%);
+    }
 
-.block-container {
-    max-width: 920px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
+    .block-container {
+        max-width: 920px;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
 
-/* HERO SECTION */
-.hero {
-    position: relative;
-    overflow: hidden;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    border-radius: 28px;
-    border: 1px solid var(--border);
-    background: linear-gradient(135deg,
-        rgba(124,58,237,0.22),
-        rgba(6,182,212,0.12),
-        rgba(15,23,42,0.95));
-    backdrop-filter: blur(18px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
-}
+    /* HERO SECTION */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        border-radius: 28px;
+        border: 1px solid var(--border);
+        background: linear-gradient(135deg,
+            rgba(124,58,237,0.22),
+            rgba(6,182,212,0.12),
+            rgba(15,23,42,0.95));
+        backdrop-filter: blur(18px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: rgba(124,58,237,0.18);
-    border-radius: 50%;
-    top: -140px;
-    right: -120px;
-    filter: blur(60px);
-}
+    .hero::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(124,58,237,0.18);
+        border-radius: 50%;
+        top: -140px;
+        right: -120px;
+        filter: blur(60px);
+    }
 
-.hero-grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    position: relative;
-    z-index: 2;
-}
+    .hero-grid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        position: relative;
+        z-index: 2;
+    }
 
-.hero-text h1 {
-    margin: 0;
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-    color: white;
-}
+    .hero-text h1 {
+        margin: 0;
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -1.5px;
+        color: white;
+    }
 
-.hero-text p {
-    margin-top: 1rem;
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.7;
-    max-width: 560px;
-}
+    .hero-text p {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 560px;
+    }
 
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    padding: .45rem .85rem;
-    margin-bottom: 1.2rem;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: #CBD5E1;
-    font-size: .82rem;
-    font-weight: 500;
-}
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .45rem .85rem;
+        margin-bottom: 1.2rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.08);
+        color: #CBD5E1;
+        font-size: .82rem;
+        font-weight: 500;
+    }
 
-.hero-logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
-    overflow: hidden;
-    font-size: 3rem;
-}
+    .hero-logo {
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        font-size: 3rem;
+    }
 
-/* CHAT BUBBLES */
-[data-testid="stChatMessage"] {
-    background: transparent !important;
-    border: none !important;
-}
+    /* CHAT BUBBLES */
+    [data-testid="stChatMessage"] {
+        background: transparent !important;
+        border: none !important;
+    }
 
-[data-testid="stChatMessageAvatarUser"] {
-    background: linear-gradient(135deg, #7C3AED, #06B6D4) !important;
-}
+    [data-testid="stChatMessageAvatarUser"] {
+        background: linear-gradient(135deg, #7C3AED, #06B6D4) !important;
+    }
 
-[data-testid="stChatMessageAvatarAssistant"] {
-    background: #111827 !important;
-}
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background: #111827 !important;
+    }
 
-[data-testid="stChatMessage"] .stMarkdown {
-    padding: 1rem 1.2rem;
-    border-radius: 20px;
-    line-height: 1.7;
-}
+    [data-testid="stChatMessage"] .stMarkdown {
+        padding: 1rem 1.2rem;
+        border-radius: 20px;
+        line-height: 1.7;
+    }
 
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) .stMarkdown {
-    background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(6,182,212,.15));
-    border: 1px solid rgba(124,58,237,.25);
-}
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) .stMarkdown {
+        background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(6,182,212,.15));
+        border: 1px solid rgba(124,58,237,.25);
+    }
 
-[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) .stMarkdown {
-    background: rgba(15,23,42,.72);
-    border: 1px solid rgba(255,255,255,.06);
-}
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) .stMarkdown {
+        background: rgba(15,23,42,.72);
+        border: 1px solid rgba(255,255,255,.06);
+    }
 
-/* INPUT */
-[data-testid="stChatInputTextArea"] {
-    background: rgba(15,23,42,.9) !important;
-    color: white !important;
-    border-radius: 18px !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-    padding: .8rem 1rem !important;
-}
+    /* INPUT */
+    [data-testid="stChatInputTextArea"] {
+        background: rgba(15,23,42,.9) !important;
+        color: white !important;
+        border-radius: 18px !important;
+        border: 1px solid rgba(255,255,255,.08) !important;
+        padding: .8rem 1rem !important;
+    }
 
-[data-testid="stChatInputTextArea"]:focus {
-    border: 1px solid rgba(124,58,237,.7) !important;
-    box-shadow: 0 0 0 4px rgba(124,58,237,.15) !important;
-}
+    [data-testid="stChatInputTextArea"]:focus {
+        border: 1px solid rgba(124,58,237,.7) !important;
+        box-shadow: 0 0 0 4px rgba(124,58,237,.15) !important;
+    }
 
-/* REFERENCES */
-.reference-card {
-    margin-top: 1rem;
-    padding: 1rem 1.1rem;
-    border-radius: 18px;
-    background: rgba(15,23,42,.65);
-    border: 1px solid rgba(255,255,255,.06);
-}
+    /* REFERENCES */
+    .reference-card {
+        margin-top: 1rem;
+        padding: 1rem 1.1rem;
+        border-radius: 18px;
+        background: rgba(15,23,42,.65);
+        border: 1px solid rgba(255,255,255,.06);
+    }
 
-[data-testid="stExpander"] {
-    border-radius: 18px !important;
-    border: 1px solid rgba(255,255,255,.06) !important;
-    background: rgba(15,23,42,.55) !important;
-}
+    [data-testid="stExpander"] {
+        border-radius: 18px !important;
+        border: 1px solid rgba(255,255,255,.06) !important;
+        background: rgba(15,23,42,.55) !important;
+    }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 20px; }
-</style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 20px; }
+    </style>
 
-<div class="hero">
-    <div class="hero-grid">
-        <div class="hero-text">
-            <div class="badge">✨ AI Powered Library Retrieval System</div>
-            <h1>Library Assistant</h1>
-            <p>Search your library collection intelligently using Retrieval-Augmented Generation (RAG), semantic search, and Gemini AI.</p>
+    <div class="hero">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <div class="badge">✨ AI Powered Library Retrieval System</div>
+                <h1>Library Assistant</h1>
+                <p>Search your library collection intelligently using Retrieval-Augmented Generation (RAG), semantic search, and Gemini AI.</p>
+            </div>
+            <div class="hero-logo">📚</div>
         </div>
-        <div class="hero-logo">📚</div>
     </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+
+# Call the CSS function
+local_css()
 
 # APA Citation Helper
 def build_apa_citation(metadata):
